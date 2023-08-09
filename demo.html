@@ -1,0 +1,49 @@
+<html>
+
+<body id="app">
+
+    <input id="color" type="text">
+    <button onclick="save()">Save</button>
+    <div id="list"></div>
+
+    <script>
+        function init() {
+            const bgColor = localStorage.getItem('bgColor')
+            let html = ''
+            if (bgColor != undefined) {
+                const arr = JSON.parse(bgColor);
+                for (let i = 0; i < arr.length; i++) {
+                    html += '<p>' + arr[i] + '</p>'
+                }
+                document.getElementById('list').innerHTML = html
+            }
+        }
+
+        function save() {
+            const value = document.getElementById('color').value;
+            const bgColor = localStorage.getItem('bgColor')
+            if (bgColor != undefined) {
+                const arrColor = JSON.parse(bgColor)
+                arrColor.push(value)
+                localStorage.setItem('bgColor', JSON.stringify(arrColor))
+            } else {
+                localStorage.setItem('bgColor', JSON.stringify([value]))
+            }
+            init()
+        }
+        init()
+
+
+        /////////////////////////////////////////////////
+        let user = {
+            fullname: 'le a',
+            email: 'support',
+            age: 25
+        }
+        console.log(user);
+        localStorage.setItem('user', JSON.stringify(user));
+    </script>
+
+</body>
+
+</html>
